@@ -17,8 +17,8 @@
 		<header id="header">
 			<div class="table">
 				<h1>
-					<strong>FuelPHP, a PHP 5.3 Framework</strong>
-					Documentation
+					<a href="http://fuelphp.com"><img height="37px" width="147px" src="./../assets/img/fuel.png" /></a>
+					<strong>Documentation</strong>
 				</h1>
 
 				<form id="google_search">
@@ -79,22 +79,28 @@
 
 <pre class="cli"><code>$ cd /where/ever/your/virtualhost/root/is
 $ git clone git://github.com/fuel/fuel.git .
-$ ./composer.phar update
-</code></pre>
-
-			<p>Don't forget the single dot, otherwise this will create a folder called <strong>fuel</strong> in your virtual host root directory!</p>
-
-			<h4 id="from_github">Clone the latest development branch from github</h4>
-
-<pre class="cli"><code>$ cd /where/ever/your/virtualhost/root/is
-$ git clone git://github.com/fuel/fuel.git -b 1.8/develop .
-$ ./composer.phar update --prefer-source
+$ ./composer.phar self-update
+$ ./composer.phar update --prefer-dist
 </code></pre>
 
 			<p>Don't forget the single dot, otherwise this will create a folder called <strong>fuel</strong> in your virtual host root directory!</p>
 
 			<p>Alternatively, you can use composer to install everything in one go:</p>
-<pre class="cli"><code>$ composer create-project fuel/fuel:dev-1.8/develop --prefer-source .
+<pre class="cli"><code>$ composer create-project fuel/fuel:dev-1.8/master --prefer-dist .
+</code></pre>
+
+			<h4 id="from_github">Clone the latest development branch from github</h4>
+
+<pre class="cli"><code>$ cd /where/ever/your/virtualhost/root/is
+$ git clone git://github.com/fuel/fuel.git -b 1.9/develop .
+$ ./composer.phar self-update
+$ ./composer.phar update
+</code></pre>
+
+			<p>Don't forget the single dot, otherwise this will create a folder called <strong>fuel</strong> in your virtual host root directory!</p>
+
+			<p>Alternatively, you can use composer to install everything in one go:</p>
+<pre class="cli"><code>$ composer create-project fuel/fuel:dev-1.9/develop --prefer-source .
 </code></pre>
 
 			<h4 id="from_zip">Download the zip file</h4>
@@ -102,7 +108,6 @@ $ ./composer.phar update --prefer-source
 			<ol>
 				<li><a href="download.html">Download the Fuel Framework</a></li>
 				<li>Unzip/Extract the download</li>
-				<li>Run <code class="cli">$ php composer.phar update</code> to install all dependencies</li>
 				<li>Move the files to your server
 					<ul>
 						<li>Note the public directory in the source equals your web server's public document directory i.e.
@@ -156,6 +161,21 @@ $ php composer.phar update
 			<h2 id="configuration">Configuration</h2>
 
 			<p>The main configuration can be found at app/config/config.php. Edit it to your liking.</p>
+
+			<h2 id="url_rewriting">URL rewriting</h2>
+
+			<p>
+				Fuel comes with default rewrite rules for Apache (.htaccess) and IIS (web.config). You can find
+				these files in the web application DOCROOT, by default this is the "public folder". If you use Nginx,
+				please find an <a href="#nginx">example</a> here.
+			</p>
+			<p class="note">
+				Please note that in some default webserver configuration, URL rewriting is disabled by default. To
+				quickly check if this is the case, make a typo in your rewrite config (for example, in your .htaccess
+				file). If your webserver can read and process the file, a typo should give you a 500 Server error. If
+				the typo you introduced doesn't make a change, changes are rewriting or htaccess processing is disabled
+				in the global config.
+			</p>
 
 			<h2 id="install_inside_root">Install inside the document root</h2>
 
@@ -222,7 +242,7 @@ $ php composer.phar update
 				consider disabling this functionality, and add the rewrite rules to the virtualhost definition.
 			</p>
 
-			<h4>Nginx</h4>
+			<h4 id="nginx">Nginx</h4>
 
 			<p>
 				Nginx doesn't support client configurated files, you so need to add the rewrite to the Nginx configuration file for the virtual host.
@@ -269,7 +289,7 @@ $ php composer.phar update
 
 		<footer>
 			<p>
-				&copy; FuelPHP Development Team 2010-2015 - <a href="http://fuelphp.com">FuelPHP</a> is released under the MIT license.
+				&copy; FuelPHP Development Team 2010-2016 - <a href="http://fuelphp.com">FuelPHP</a> is released under the MIT license.
 			</p>
 		</footer>
 	</div>

@@ -1,5 +1,5 @@
 /* set the page title, including the version of these docs */
-var DocVersion = "1.7.3";
+var DocVersion = "1.8";
 
 // set the google CSE key based on the docversion
 if (DocVersion.indexOf('-dev') == -1) {
@@ -350,7 +350,7 @@ function setup() {
 	}
 
 	var title = $('#header div h1').html();
-	$('#header div h1').html(title.replace('</strong>', '</strong><span>'+DocVersion+'</span>'));
+	$('#header div h1').html(title.replace('<strong>', '<span>'+DocVersion+'</span><strong>'));
 
 	if(Cookie.read('menu') === 'true') {
 		$('#toc_handle').trigger('snapopen');
@@ -370,18 +370,18 @@ var pane_names = {
 
 panes.main = {
 	"Basic": {
-		"Home":			"index.html",
-		"Table of Contents": "toc.html",
-		"Requirements":	"requirements.html",
-		"License":		"license.html",
-		"Contribute":	"contribute.html",
-		"Credits":		"credits.html"
+		"Home":					"index.html",
+		"Table of Contents":	"toc.html",
+		"Requirements":			"requirements.html",
+		"License":				"license.html",
+		"Contribute":			"contribute.html",
+		"Credits":				"credits.html",
+		"External info":		"installation/external.html"
 	},
 	"Installation": {
 		"Instructions":			"installation/instructions.html",
 		"Download":				"installation/download.html",
 		"Upgrade":				"installation/upgrade.html",
-		"Tutorials":			"installation/tutorials.html",
 		"Troubleshooting":		"installation/troubleshooting.html"
 	},
 	"General": {

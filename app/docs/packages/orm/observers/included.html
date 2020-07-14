@@ -17,8 +17,8 @@
 		<header id="header">
 			<div class="table">
 				<h1>
-					<strong>FuelPHP, a PHP 5.3 Framework</strong>
-					Documentation
+					<a href="http://fuelphp.com"><img height="37px" width="147px" src="./../../../assets/img/fuel.png" /></a>
+					<strong>Documentation</strong>
 				</h1>
 
 				<form id="google_search">
@@ -388,6 +388,14 @@ protected static $_observers = array('Orm\\Observer_Typing' => array(
 					current defined locale into account.
 				</p>
 
+				<p class="note">
+					By default the Typing observer is locale aware, meaning that it can deal with incoming string values
+					that use a decimal comma for fields defined as decimal or float, if the current locale defines the
+					decimal separator as a comma. It will also format outgoing decimal values according to the current
+					locale settings. You can disable this by defining the "orm.use_locale" config key, either in your
+					main config.php file or in a separate orm.php config file, and set it to <kbd>false</kbd>.
+				</p>
+
 				<h3 id="os_slug">Observer_Slug</h3>
 
 				<p>
@@ -422,7 +430,7 @@ protected static $_observers = array('Orm\\Observer_Slug' => array('before_inser
 
 		<footer>
 			<p>
-				&copy; FuelPHP Development Team 2010-2015 - <a href="http://fuelphp.com">FuelPHP</a> is released under the MIT license.
+				&copy; FuelPHP Development Team 2010-2016 - <a href="http://fuelphp.com">FuelPHP</a> is released under the MIT license.
 			</p>
 		</footer>
 	</div>

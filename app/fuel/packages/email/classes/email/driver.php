@@ -5,10 +5,10 @@
  * Fuel is a fast, lightweight, community driven PHP5 framework.
  *
  * @package    Fuel
- * @version    1.7
+ * @version    1.8
  * @author     Fuel Development Team
  * @license    MIT License
- * @copyright  2010 - 2015 Fuel Development Team
+ * @copyright  2010 - 2016 Fuel Development Team
  * @link       http://fuelphp.com
  */
 
@@ -951,8 +951,23 @@ abstract class Email_Driver
 	 */
 	protected function encode_mimeheader($header)
 	{
+		// we need mbstring for this
+		if ( ! MBSTRING)
+		{
+			throw new \RuntimeException('Email requires the multibyte package ("mbstring") package to be installed!');
+		}
+
 		$transfer_encoding = ($this->config['encoding'] === 'quoted-printable') ? 'Q' : 'B' ;
-		return mb_encode_mimeheader($header, $this->config['charset'], $transfer_encoding, $this->config['newline']);
+
+		// work around possible bugs with encoding by setting the encoding manually
+		$current_encoding = mb_internal_encoding();
+		mb_internal_encoding($this->config['charset']);
+
+		$header = mb_encode_mimeheader($header, $this->config['charset'], $transfer_encoding, $this->config['newline']);
+
+		mb_internal_encoding($current_encoding);
+
+		return $header;
 	}
 
 	/**
@@ -1186,7 +1201,7 @@ abstract class Email_Driver
 	protected static function wrap_text($message, $length, $newline, $is_html = true)
 	{
 		$length = ($length > 76) ? 76 : $length;
-		$is_html and $message = preg_replace('/[\r\n\t]/m', '', $message);
+		$is_html and $message = preg_replace('/[\r\n\t ]+/m', ' ', $message);
 		$message = wordwrap($message, $length, $newline, false);
 
 		return $message;
