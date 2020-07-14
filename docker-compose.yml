@@ -1,0 +1,15 @@
+version: "3.3"
+
+services  :
+  web:
+    build: ./docker/centos/
+    image: fuel_img
+    container_name: fuel_cont
+    ports:
+      - "8081:80"
+    volumes:
+      - ./app/:/var/www/app/
+    privileged: true
+    tty: true
+    restart: always
+    command: /sbin/init
